@@ -3,6 +3,9 @@ package Client;
 import Decorator.*;
 import Factory.*;
 import Factory.AbsSubject;
+import Observer.ManageObserver;
+import Observer.ObserverOne;
+import Observer.ObserverTwo;
 import Proxy.*;
 import Strategy.AbsStrategy;
 import Strategy.IStrategy;
@@ -83,6 +86,15 @@ public class Client {
         t2.templateMethod321();
         t2.templateMethod123();
 
-
+        //观察者模式
+        ManageObserver manageObserver = new ManageObserver();
+        manageObserver.notifyObserver();
+        ObserverOne observerOne = new ObserverOne();
+        ObserverTwo observerTwo = new ObserverTwo();
+        int i = manageObserver.addObserver(observerOne).addObserver(observerTwo).notifyObserver();
+        System.out.println(i+" observers has been notifyChanges");
+        //manageObserver.addObserver(observerTwo);
+        //manageObserver.notifyObserver();
+        manageObserver.removeObserver(observerTwo).notifyObserver();
     }
 }
