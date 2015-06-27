@@ -6,7 +6,7 @@ package Observer;
 public class ObserverOne extends BaseObserver implements IObserver {
 
     @Override
-    public void notifyChanges() {
+    public void update() {
         print("ObserverOne received change message");
     }
 }

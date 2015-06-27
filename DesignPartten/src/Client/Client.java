@@ -1,11 +1,12 @@
 package Client;
 
+import Builder.*;
 import Decorator.*;
+import Facade.Facage;
 import Factory.*;
 import Factory.AbsSubject;
-import Observer.ManageObserver;
-import Observer.ObserverOne;
-import Observer.ObserverTwo;
+import Observer.*;
+import Observer.ISubject;
 import Proxy.*;
 import Strategy.AbsStrategy;
 import Strategy.IStrategy;
@@ -87,14 +88,32 @@ public class Client {
         t2.templateMethod123();
 
         //观察者模式
-        ManageObserver manageObserver = new ManageObserver();
-        manageObserver.notifyObserver();
+        ISubject concreteSubject = new ConcreteSubject();
+        concreteSubject.nofifyObserver();
         ObserverOne observerOne = new ObserverOne();
         ObserverTwo observerTwo = new ObserverTwo();
-        int i = manageObserver.addObserver(observerOne).addObserver(observerTwo).notifyObserver();
+        int i = concreteSubject.addObserver(observerOne).addObserver(observerTwo).nofifyObserver();
         System.out.println(i+" observers has been notifyChanges");
         //manageObserver.addObserver(observerTwo);
         //manageObserver.notifyObserver();
-        manageObserver.removeObserver(observerTwo).notifyObserver();
+        concreteSubject.removeObserver(observerTwo).nofifyObserver();
+
+        //外观模式
+        Facage facage = new Facage();
+        facage.facadeMethodOne();
+        facage.facadeMethodTwo();
+
+        //建造者模式
+        Director director = new Director();
+        IBuilder iBuilder = new RedBuilder();
+        director.setBuilder(iBuilder);
+        director.contruct();
+        Product product = iBuilder.getProduct();
+        System.out.println(product.getPartA().getName().toString());
+        iBuilder = new GreenBuilder();
+        director.setBuilder(iBuilder);
+        director.contruct();
+        product = iBuilder.getProduct();
+
     }
 }
